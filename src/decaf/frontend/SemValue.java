@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import decaf.Location;
 import decaf.tree.Tree;
+import decaf.tree.Tree.*;
 import decaf.tree.Tree.ClassDef;
 import decaf.tree.Tree.Expr;
 import decaf.tree.Tree.LValue;
@@ -70,6 +71,13 @@ public class SemValue {
     public LValue lvalue;
 
     public Vector<SemValue> vec;
+
+    /**
+     * case statement list
+     */
+    public List<Expr> caseConstList, caseExprList;
+
+    public Expr caseConst, caseExpr;
 
     /**
      * 创建一个关键字的语义值

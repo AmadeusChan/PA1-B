@@ -24,6 +24,7 @@ DO OD DOSEPERATOR
 '+'  '-'  '*'  '/'  '%'  '='  '>'  '<'  '.'
 ','  ';'  '!'  '('  ')'  '['  ']'  '{'  '}'
 '@'  '$' '#'
+':'
 
 %%
 
@@ -375,6 +376,28 @@ Oper7           :   '-'
                 ;
 
 // expressions
+
+DefaultExpr	:	DEFAULT ':' Expr ';'
+	    		{
+				$$.expr = $3.expr;
+			}
+		;
+
+
+CaseExprList	:	Constant ':' Expr ';' CaseExprList
+	     		{
+				$$ = $5;
+				$$.caseConstList.add(0, $1.expr);
+				$$.caseExprList.add(0, $3.expr);
+			}
+		|	/* empty */
+			{
+				$$ = new SemValue();
+				$$.caseConstList = new ArrayList<Expr>();
+				$$.caseExprList = new ArrayList<Expr>();
+			}
+	     	;
+
 Expr            :   Expr1
                     {
                         $$.expr = $1.expr;
@@ -657,6 +680,12 @@ Expr9           :   Constant
                             $$.expr = new Tree.Ident(null, $1.ident, $1.loc);
                         }
                     }
+		|   CASE '(' Expr ')' '{' CaseExprList DefaultExpr '}' 
+		    {
+		    	$$.expr = new Tree.Case(
+				$3.expr, $6.caseConstList, $6.caseExprList, $7.expr, $1.loc
+			);
+		    }
                 ;
 
 AfterNewExpr    :   IDENTIFIER '(' ')'

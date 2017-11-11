@@ -1386,6 +1386,53 @@ public abstract class Tree {
         }
     }
 
+     /**
+     * A case statement
+     */
+    public static class Case extends Expr {
+
+	    public Expr condition, defaultExpr;
+	    public List<Expr> caseConstList, caseExprList;
+
+	    public Case(Expr condition, List<Expr> caseConstList, List<Expr> caseExprList, Expr defaultExpr, Location loc) {
+		    super(CASEEXPR, loc);
+		    this.condition = condition;
+		    this.caseConstList = caseConstList;
+		    this.caseExprList = caseExprList;
+		    this.defaultExpr = defaultExpr;
+	    }
+
+	    	@Override
+	        public void accept(Visitor v) {
+	            v.visitCase(this);
+	        }
+
+	    	@Override
+	    	public void printTo(IndentPrintWriter pw) {
+			pw.println("cond");
+    			pw.incIndent();
+			condition.printTo(pw);
+			pw.println("cases");
+    			pw.incIndent();
+			int len = caseConstList.size();
+			for (int i=0; i<len; ++i) {
+				pw.println("case");
+				pw.incIndent();
+				caseConstList.get(i).printTo(pw);
+				caseExprList.get(i).printTo(pw);
+				pw.decIndent();
+			}
+			pw.println("default");
+			pw.incIndent();
+			defaultExpr.printTo(pw);
+			pw.decIndent();
+
+			pw.decIndent();
+			pw.decIndent();
+	    	}
+
+    }
+
     /**
      * A generic visitor class for trees.
      */
@@ -1530,6 +1577,28 @@ public abstract class Tree {
         public void visitTypeArray(TypeArray that) {
             visitTree(that);
         }
+
+	public void visitCase(Case that) {
+		visitTree(that);
+	}
+
+	/*
+	public void visitSuperExpr(SuperExpr that) {
+		visitTree(that);
+	}
+
+	public void visitDCopyExpr(DCopyExpr that) {
+		visitTree(that);
+	}
+
+	public void visitSCopyExpr(SCopyExpr that) {
+		visitTree(that);
+	}
+
+	public void visitDoOdLoop(DoOdLoop that) {
+		visitTree(that);
+	}
+	*/
 
         public void visitTree(Tree that) {
             assert false;

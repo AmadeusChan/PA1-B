@@ -1,9 +1,8 @@
 class Main {
 	static void main() {
-		complex c;
-		b = 1+ 2j;
-		z = @b + #c;
-		d = $a;
-		PrintComp(z1, z2);
+		a = case(n) {
+			1: "A";
+			default: "B";
+		};
 	}
 }
