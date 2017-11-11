@@ -241,6 +241,10 @@ Stmt            :   VariableDef
 		    {
 		    	$$.stmt = $1.stmt;
 		    }
+		|   DoStmt ';'
+		    {
+		    	$$.stmt = $1.stmt;
+		    }
                 |   BreakStmt ';'
                     {
                         $$.stmt = $1.stmt;
@@ -250,6 +254,33 @@ Stmt            :   VariableDef
                         $$.stmt = $1.stmt;
                     }
                 ;
+
+DoStmt		:	DO DoSubStmt DoBranchList OD
+			{
+				$$.stmt = new Tree.DoOdLoop($3.doExprList, $3.doStmtList, $2.doExpr, $2.doStmt, $1.loc);
+			}
+		;
+
+DoBranchList	:	DOSEPERATOR DoSubStmt DoBranchList
+	     		{
+				$$ = $3;
+				$$.doExprList.add(0, $2.doExpr);
+				$$.doStmtList.add(0, $2.doStmt);
+			}
+	     	|	/* empty */
+			{
+				$$ = new SemValue();
+				$$.doExprList = new ArrayList<Expr>();
+				$$.doStmtList = new ArrayList<Tree>();
+			}
+		;
+
+DoSubStmt	:	Expr ':' Stmt
+	  		{
+				$$.doExpr = $1.expr;
+				$$.doStmt = $3.stmt;
+			}
+		;
 
 SimpleStmt      :   Expr Assignment
                     {

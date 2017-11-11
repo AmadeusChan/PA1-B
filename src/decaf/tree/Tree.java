@@ -522,6 +522,49 @@ public abstract class Tree {
     }
 
     /**
+     * A do-od loop
+     */
+    public static class DoOdLoop extends Tree {
+
+	    public List<Expr> exprList;
+	    public List<Tree> stmtList;
+
+	    public DoOdLoop(List<Expr> exprList, List<Tree> stmtList, Expr expr, Tree stmt, Location loc) {
+		    super(DOODLOOP, loc);
+		    this.exprList = exprList;
+		    this.stmtList = stmtList;
+		    this.exprList.add(0, expr);
+		    this.stmtList.add(0, stmt);
+	    }
+
+	    @Override
+	    public void accept(Visitor v) {
+		    v.visitDoOdLoop(this);
+	    }
+
+	    @Override
+	    public void printTo(IndentPrintWriter pw) {
+		    pw.println("do");
+		    pw.incIndent();
+		    pw.println("branches");
+		    pw.incIndent();
+
+		    int len = exprList.size();
+		    for (int i=0; i<len; ++i) {
+			    pw.println("branch");
+			    pw.incIndent();
+			    exprList.get(i).printTo(pw);
+			    stmtList.get(i).printTo(pw);
+			    pw.decIndent();
+		    }
+
+		    pw.decIndent();
+		    pw.decIndent();
+	    }
+
+    }
+
+    /**
      * A for loop.
      */
     public static class ForLoop extends Tree {
@@ -1665,11 +1708,9 @@ public abstract class Tree {
 		visitTree(that);
 	}
 
-	/*
 	public void visitDoOdLoop(DoOdLoop that) {
 		visitTree(that);
 	}
-	*/
 
         public void visitTree(Tree that) {
             assert false;

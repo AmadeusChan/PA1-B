@@ -80,6 +80,14 @@ public class SemValue {
     public Expr caseConst, caseExpr;
 
     /**
+     * do-od statement list
+     */
+	public List<Expr> doExprList;
+	public List<Tree> doStmtList;
+	public Expr doExpr;
+	public Tree doStmt;
+
+    /**
      * 创建一个关键字的语义值
      *
      * @param code 关键字的代表码
