@@ -1,0 +1,10 @@
+program
+    class Main <empty>
+        static func main voidtype
+            formals
+            stmtblock
+                print
+                    stringconst "Hello World!\n"
+                add
+                    intconst 1
+                    imgconst 3j

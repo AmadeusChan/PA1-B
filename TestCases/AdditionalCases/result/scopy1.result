@@ -1,0 +1,10 @@
+program
+    class Main <empty>
+        static func main voidtype
+            formals
+            stmtblock
+                print
+                    stringconst "Hello World!\n"
+                printcomp
+                    scopy
+                        varref c

@@ -1,0 +1,22 @@
+class Main {
+	int z;
+	static void main() {
+		Print("Hello World!\n");
+		z = case(1+3j+helloworld) {
+			1: 1;
+			2: 2j;
+			3: "hello world";
+			4: go;
+			5: going;
+		};
+		b = case(hello) {
+			1: case(helloworld) {
+				1: hhh;
+				2: iamtwo;
+				default: defaultvalue;
+			};
+			default: 
+					mainvalue;
+		};
+	}
+}

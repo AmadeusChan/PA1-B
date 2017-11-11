@@ -1,0 +1,8 @@
+class Main {
+	static void main() {
+		Print("Hello World!\n");
+		z = super.z;
+		e = super.fun(hello);
+		super.pro(case(z){1:1;default:0;});
+	}
+}

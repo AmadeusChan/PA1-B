@@ -1,0 +1,54 @@
+program
+    class Main <empty>
+        vardef z inttype
+        static func main voidtype
+            formals
+            stmtblock
+                print
+                    stringconst "Hello World!\n"
+                assign
+                    varref z
+                    cond
+                        add
+                            add
+                                intconst 1
+                                imgconst 3j
+                            varref helloworld
+                        cases
+                            case
+                                intconst 1
+                                intconst 1
+                            case
+                                intconst 2
+                                imgconst 2j
+                            case
+                                intconst 3
+                                stringconst "hello world"
+                            case
+                                intconst 4
+                                varref go
+                            case
+                                intconst 5
+                                varref going
+                            default
+                                varref thisisdefaultvalue
+                assign
+                    varref b
+                    cond
+                        varref hello
+                        cases
+                            case
+                                intconst 1
+                                cond
+                                    varref helloworld
+                                    cases
+                                        case
+                                            intconst 1
+                                            varref hhh
+                                        case
+                                            intconst 2
+                                            varref iamtwo
+                                        default
+                                            varref defaultvalue
+                            default
+                                varref mainvalue

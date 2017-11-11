@@ -1,0 +1,10 @@
+class Main {
+	complex thisisacomplex;
+	complex[] thisisacomplexarray;
+	// this is not legal! 
+	complex[2][3] thisisacomplexmatrix;
+
+	static void main() {
+		Print("Hello World!\n");
+	}
+}

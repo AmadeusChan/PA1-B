@@ -1,0 +1,27 @@
+program
+    class Main <empty>
+        static func main voidtype
+            formals
+            stmtblock
+                print
+                    stringconst "Hello World!\n"
+                do
+                    branches
+                        branch
+                            les
+                                varref y
+                                intconst 10
+                            assign
+                                varref y
+                                add
+                                    varref y
+                                    intconst 1
+                        branch
+                            les
+                                varref x
+                                intconst 10
+                            assign
+                                varref x
+                                add
+                                    varref x
+                                    intconst 1

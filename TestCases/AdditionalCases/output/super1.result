@@ -1,0 +1,26 @@
+program
+    class Main <empty>
+        static func main voidtype
+            formals
+            stmtblock
+                print
+                    stringconst "Hello World!\n"
+                assign
+                    varref z
+                    varref z
+                        super
+                assign
+                    varref e
+                    call fun
+                        super
+                        varref hello
+                call pro
+                    super
+                    cond
+                        varref z
+                        cases
+                            case
+                                intconst 1
+                                intconst 1
+                            default
+                                intconst 0

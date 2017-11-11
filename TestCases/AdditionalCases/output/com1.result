@@ -1,0 +1,61 @@
+program
+    class Main <empty>
+        vardef thisisacomplex comptype
+        vardef thisisacomplexarray arrtype comptype
+        vardef thisisacomplexmatrix arrtype arrtype comptype
+        static func main voidtype
+            formals
+            stmtblock
+                print
+                    stringconst "Hello World!\n"
+                vardef z comptype
+                assign
+                    varref z
+                    add
+                        add
+                            add
+                                add
+                                    intconst 1
+                                    varref j
+                                div
+                                    add
+                                        imgconst 2324j
+                                        imgconst 113j
+                                    intconst 2424234
+                            imgconst 3j
+                        varref okay
+                assign
+                    varref comp
+                    add
+                        intconst 1
+                        imgconst 10j
+                assign
+                    varref z
+                    re
+                        compcast
+                            im
+                                im
+                                    compcast
+                                        re
+                                            compcast
+                                                im
+                                                    im
+                                                        im
+                                                            compcast
+                                                                add
+                                                                    add
+                                                                        add
+                                                                            intconst 2
+                                                                            imgconst 13j
+                                                                        imgconst 2j
+                                                                    varref hello
+                printcomp
+                    varref z
+                printcomp
+                    intconst 2
+                printcomp
+                    add
+                        add
+                            varref hellworld
+                            imgconst 20j
+                        varref j

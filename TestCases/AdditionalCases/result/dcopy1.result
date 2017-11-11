@@ -1,0 +1,11 @@
+program
+    class Main <empty>
+        static func main voidtype
+            formals
+            stmtblock
+                print
+                    stringconst "Hello World!\n"
+                assign
+                    varref z
+                    dcopy
+                        varref z

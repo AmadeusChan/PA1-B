@@ -1,0 +1,25 @@
+class Main {
+	complex thisisacomplex;
+	complex[] thisisacomplexarray;
+	complex[][] thisisacomplexmatrix;
+
+	static void main() {
+		Print("Hello World!\n");
+
+		// test feature 1.(1)
+						complex z      ;
+
+		// test feature 1.(2)
+						z = 1+j+(2324j+113j)/2424234+3j+okay;
+						comp = 1+10j;
+
+		// test feature 1.(3)
+			z = @#$$#@#$$$#(2+13j+2j+hello);
+		
+		// test feature 1.(4)
+		PrintComp(z);
+		PrintComp(2);
+		PrintComp(hellworld+20j+j);
+
+	}
+}
