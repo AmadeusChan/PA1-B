@@ -1,7 +1,7 @@
 /* This is auto-generated source by LL1-Parser-Gen.
  * Specification file: /Users/amadeus/academic_materials/Semester_Fall2017/Compilers/projects/PA1-B/src/decaf/frontend/Parser.spec
  * Options: unstrict mode
- * Generated at: Sat Nov 04 12:15:14 CST 2017
+ * Generated at: Fri Nov 10 21:54:49 CST 2017
  * Please do NOT modify it!
  *
  * Project repository: https://github.com/paulzfm/LL1-Parser-Gen
