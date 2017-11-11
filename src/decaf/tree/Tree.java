@@ -277,6 +277,27 @@ public abstract class Tree {
     public static final int BOOL = INT + 1;
     public static final int STRING = BOOL + 1;
 
+    /**
+     * for additional features
+     */
+    public static final int COMPLEX = STRING + 1;
+    public static final int COMPIMG = COMPLEX+ 1;
+
+    public static final int GETCOMPRE = COMPIMG + 1;
+    public static final int GETCOMPIM = GETCOMPRE + 1;
+    public static final int INT2COMP = GETCOMPIM + 1;
+
+    public static final int PRINTCOMP = INT2COMP + 1;
+
+    public static final int CASEEXPR = PRINTCOMP + 1;
+
+    public static final int SUPEREXPR = CASEEXPR + 1;
+
+    public static final int DCOPYEXPR = SUPEREXPR + 1;
+    public static final int SCOPYEXPR = DCOPYEXPR + 1;
+
+    public static final int DOODLOOP = SCOPYEXPR + 1;
+
     public Location loc;
     public int tag;
 
@@ -659,6 +680,34 @@ public abstract class Tree {
         }
     }
 
+     /**
+     * a printComp statement
+     */
+    public static class PrintComp extends Tree {
+
+    	public List<Expr> exprs;
+
+    	public PrintComp(List<Expr> exprs, Location loc) {
+    		super(PRINTCOMP, loc);
+    		this.exprs = exprs;
+    	}
+
+        @Override
+        public void accept(Visitor v) {
+            v.visitPrintComp(this);
+        }
+
+        @Override
+    	public void printTo(IndentPrintWriter pw) {
+    		pw.println("printcomp");
+    		pw.incIndent();
+    		for (Expr e : exprs) {
+    			e.printTo(pw);
+    		}
+    		pw.decIndent();
+        }
+    }
+
     /**
      * A return statement.
      */
@@ -885,16 +934,26 @@ public abstract class Tree {
         }
 
         @Override
-        public void printTo(IndentPrintWriter pw) {
-            switch (tag) {
-                case NEG:
-                    unaryOperatorToString(pw, "neg");
-                    break;
-                case NOT:
-                    unaryOperatorToString(pw, "not");
-                    break;
-            }
-        }
+	public void printTo(IndentPrintWriter pw) {
+    		switch (tag) {
+    		case NEG:
+    			unaryOperatorToString(pw, "neg");
+    			break;
+    		case NOT:
+    			unaryOperatorToString(pw, "not");
+    			break;
+    		case GETCOMPIM:
+    			unaryOperatorToString(pw, "im");
+    			break;
+    		case GETCOMPRE:
+    			unaryOperatorToString(pw, "re");
+    			break;
+    		case INT2COMP:
+    			unaryOperatorToString(pw, "compcast");
+    			break;
+			}
+    	}
+
     }
 
     /**
@@ -1209,6 +1268,9 @@ public abstract class Tree {
                 case BOOL:
                     pw.println("boolconst " + value);
                     break;
+		case COMPIMG:
+		    pw.println("imgconst " + value + "j");
+		    break;
                 default:
                     pw.println("stringconst " + MiscUtils.quote((String) value));
             }
@@ -1271,6 +1333,9 @@ public abstract class Tree {
                 case VOID:
                     pw.print("voidtype");
                     break;
+		case COMPLEX:
+		    pw.print("comptype");
+		    break;
                 default:
                     pw.print("stringtype");
             }
@@ -1419,6 +1484,10 @@ public abstract class Tree {
         }
 
         public void visitPrint(Print that) {
+            visitTree(that);
+        }
+
+	public void visitPrintComp(PrintComp that) {
             visitTree(that);
         }
 

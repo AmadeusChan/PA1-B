@@ -1,20 +1,21 @@
+*** Error at (3,10): syntax error
 *** Error at (3,19): syntax error
-*** Error at (4,5): unrecognized character ':'
+*** Error at (4,5): syntax error
 *** Error at (4,14): syntax error
-*** Error at (5,5): unrecognized character ':'
+*** Error at (5,5): syntax error
 *** Error at (5,15): syntax error
-*** Error at (6,5): unrecognized character ':'
+*** Error at (6,5): syntax error
 *** Error at (6,17): syntax error
-*** Error at (7,5): unrecognized character ':'
+*** Error at (7,5): syntax error
 *** Error at (7,16): syntax error
-*** Error at (8,5): unrecognized character ':'
+*** Error at (8,5): syntax error
 *** Error at (8,14): syntax error
-*** Error at (9,5): unrecognized character ':'
+*** Error at (9,5): syntax error
 *** Error at (9,16): syntax error
-*** Error at (10,5): unrecognized character ':'
+*** Error at (10,5): syntax error
 *** Error at (10,14): syntax error
-*** Error at (11,20): unrecognized character ':'
-*** Error at (18,12): syntax error
-*** Error at (18,19): unrecognized character ':'
+*** Error at (11,13): syntax error
+*** Error at (18,9): syntax error
+*** Error at (18,19): syntax error
 *** Error at (18,21): syntax error
-*** Error at (19,5): syntax error
+*** Error at (18,57): syntax error

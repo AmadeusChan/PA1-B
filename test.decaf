@@ -1,0 +1,9 @@
+class Main {
+	static void main() {
+		complex c;
+		b = 1+ 2j;
+		z = @b + #c;
+		d = $a;
+		PrintComp(z1, z2);
+	}
+}

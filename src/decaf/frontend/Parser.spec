@@ -11,15 +11,19 @@ javafx.util.Pair
 %start Program
 
 %tokens
-VOID   BOOL  INT   STRING   CLASS
-NULL   EXTENDS     THIS     WHILE   FOR
+VOID   BOOL  INT   STRING   CLASS COMPLEX
+NULL   EXTENDS     THIS     WHILE   FOR SUPER
+CASE DEFAULT
 IF     ELSE        RETURN   BREAK   NEW
-PRINT  READ_INTEGER         READ_LINE
+PRINT  READ_INTEGER         READ_LINE PRINTCOMP
 LITERAL
 IDENTIFIER   AND      OR    STATIC  INSTANCEOF
 LESS_EQUAL   GREATER_EQUAL  EQUAL   NOT_EQUAL
+DCOPY SCOPY
+DO OD DOSEPERATOR
 '+'  '-'  '*'  '/'  '%'  '='  '>'  '<'  '.'
 ','  ';'  '!'  '('  ')'  '['  ']'  '{'  '}'
+'@'  '$' '#'
 
 %%
 
@@ -77,6 +81,10 @@ SimpleType      :   INT
                     {
                         $$.type = new Tree.TypeClass($2.ident, $1.loc);
                     }
+		|   COMPLEX
+		    {
+			$$.type = new Tree.TypeIdent(Tree.COMPLEX, $1.loc);
+		    }
                 ;
 
 Type            :   SimpleType ArrayType
@@ -228,6 +236,10 @@ Stmt            :   VariableDef
                     {
                         $$.stmt = $1.stmt;
                     }
+		|   PrintCompStmt ';'
+		    {
+		    	$$.stmt = $1.stmt;
+		    }
                 |   BreakStmt ';'
                     {
                         $$.stmt = $1.stmt;
@@ -345,6 +357,21 @@ Oper7           :   '-'
                         $$.counter = Tree.NOT;
                         $$.loc = $1.loc;
                     }
+		|   '@'
+		    {
+		    	$$.counter = Tree.GETCOMPRE;
+			$$.loc = $1.loc;
+		    }
+		|   '$'
+		    {
+		    	$$.counter = Tree.GETCOMPIM;
+			$$.loc = $1.loc;
+		    }
+		|   '#'
+		    {
+		    	$$.counter = Tree.INT2COMP;
+			$$.loc = $1.loc;
+		    }
                 ;
 
 // expressions
@@ -528,7 +555,7 @@ ExprT6          :   Oper6 Expr7 ExprT6
                 |   /* empty */
                 ;
 
-Expr7           :   Oper7 Expr8
+Expr7           :   Oper7 Expr7
                     {
                         $$.expr = new Tree.Unary($1.counter, $2.expr, $1.loc);
                     }
@@ -759,4 +786,10 @@ PrintStmt       :   PRINT '(' ExprList ')'
                     {
                         $$.stmt = new Tree.Print($3.elist, $1.loc);
                     }
+		;
+
+PrintCompStmt	:   PRINTCOMP '(' ExprList ')'
+	      	    {
+			$$.stmt = new PrintComp($3.elist, $1.loc);
+		    }
                 ;
