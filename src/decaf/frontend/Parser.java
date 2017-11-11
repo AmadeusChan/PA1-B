@@ -81,6 +81,31 @@ public class Parser extends Table {
      */
     private SemValue parse(int symbol, Set<Integer> follow) {
         Pair<Integer, List<Integer>> result = query(symbol, lookahead); // get production by lookahead symbol
+	Set<Integer> endSet = new HashSet<Integer>();
+	endSet.addAll(follow);
+	endSet.addAll(followSet(symbol));
+
+	boolean failed = false;
+	// if M(A, a) is not defined
+	if (result == null) {
+		error();
+		if (endSet.contains(lookahead)) {
+			return null;
+		}
+
+		failed = true;
+		//System.out.println("V:" + symbol + " T:" + lookahead);
+		while (true) {
+			lookahead = lex();
+			//System.out.println((char)lookahead);
+			result = query(symbol, lookahead);
+			if (result != null) break;
+			if (endSet.contains(lookahead)) {
+				return null;
+			}
+		}
+	}
+
         int actionId = result.getKey(); // get user-defined action
 
         List<Integer> right = result.getValue(); // right-hand side of production
@@ -90,10 +115,17 @@ public class Parser extends Table {
         for (int i = 0; i < length; i++) { // parse right-hand side symbols one by one
             int term = right.get(i);
             params[i + 1] = isNonTerminal(term)
-                    ? parse(term, follow) // for non terminals: recursively parse it
+                    ? parse(term, endSet) // for non terminals: recursively parse it
                     : matchToken(term) // for terminals: match token
                     ;
+	    if (params[i + 1] == null) {
+		    failed = true;
+	    }
         }
+
+	if (failed) {
+		return null;
+	}
 
         params[0] = new SemValue(); // initialize return value
         act(actionId, params); // do user-defined action
@@ -110,6 +142,7 @@ public class Parser extends Table {
         SemValue self = val;
         if (lookahead != expected) {
             error();
+	    //System.out.println("T:" + lookahead + " exp:" + expected);
             return null;
         }
 
