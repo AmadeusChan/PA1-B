@@ -746,6 +746,23 @@ public abstract class Tree {
         }
     }
 
+    public static class SuperExpr extends Expr {
+
+    	public SuperExpr(Location loc) {
+    		super(SUPEREXPR, loc);
+    	}
+
+    	@Override
+    	public void accept(Visitor visitor) {
+    		visitor.visitSuperExpr(this);
+    	}
+
+    	@Override
+    	public void printTo(IndentPrintWriter pw) {
+    		pw.println("super");
+    	}
+   }
+
     /**
      * A method invocation
      */
@@ -1582,11 +1599,11 @@ public abstract class Tree {
 		visitTree(that);
 	}
 
-	/*
 	public void visitSuperExpr(SuperExpr that) {
 		visitTree(that);
 	}
 
+	/*
 	public void visitDCopyExpr(DCopyExpr that) {
 		visitTree(that);
 	}

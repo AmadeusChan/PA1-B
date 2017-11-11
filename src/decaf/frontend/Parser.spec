@@ -686,6 +686,10 @@ Expr9           :   Constant
 				$3.expr, $6.caseConstList, $6.caseExprList, $7.expr, $1.loc
 			);
 		    }
+		|   SUPER
+		    {
+                	$$.expr = new Tree.SuperExpr($1.loc);
+		    }
                 ;
 
 AfterNewExpr    :   IDENTIFIER '(' ')'
