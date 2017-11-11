@@ -746,6 +746,60 @@ public abstract class Tree {
         }
     }
 
+    /**
+     * A deep copy expression
+     */
+    public static class DCopyExpr extends Expr {
+
+	    public Expr expr;
+
+	    public DCopyExpr(Expr expr, Location loc) {
+		    super(DCOPYEXPR, loc);
+		    this.expr = expr;
+	    }
+
+	    @Override
+	    public void accept(Visitor v) {
+		    v.visitDCopyExpr(this);
+	    }
+
+	    @Override
+	    public void printTo(IndentPrintWriter pw) {
+		    pw.println("dcopy");
+		    pw.incIndent();
+		    expr.printTo(pw);
+		    pw.decIndent();
+	    }
+
+    }
+
+    /**
+     * A shallow copy expression
+     */ 
+    public static class SCopyExpr extends Expr {
+
+	    public Expr expr;
+
+	    public SCopyExpr(Expr expr, Location loc) {
+		    super(SCOPYEXPR, loc);
+		    this.expr = expr;
+	    }
+
+	    @Override
+	    public void accept(Visitor v) {
+		    v.visitSCopyExpr(this);
+	    }
+
+	    @Override
+	    public void printTo(IndentPrintWriter pw) {
+		    pw.println("scopy");
+		    pw.incIndent();
+		    expr.printTo(pw);
+		    pw.decIndent();
+	    }
+
+    }
+
     public static class SuperExpr extends Expr {
 
     	public SuperExpr(Location loc) {
@@ -1603,7 +1657,6 @@ public abstract class Tree {
 		visitTree(that);
 	}
 
-	/*
 	public void visitDCopyExpr(DCopyExpr that) {
 		visitTree(that);
 	}
@@ -1612,6 +1665,7 @@ public abstract class Tree {
 		visitTree(that);
 	}
 
+	/*
 	public void visitDoOdLoop(DoOdLoop that) {
 		visitTree(that);
 	}

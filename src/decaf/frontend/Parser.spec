@@ -690,6 +690,14 @@ Expr9           :   Constant
 		    {
                 	$$.expr = new Tree.SuperExpr($1.loc);
 		    }
+		|   DCOPY '(' Expr ')'
+		    {
+			$$.expr = new Tree.DCopyExpr($3.expr, $1.loc);
+		    }
+		|   SCOPY '(' Expr ')'
+		    {
+			$$.expr = new Tree.SCopyExpr($3.expr, $1.loc);
+		    }
                 ;
 
 AfterNewExpr    :   IDENTIFIER '(' ')'
